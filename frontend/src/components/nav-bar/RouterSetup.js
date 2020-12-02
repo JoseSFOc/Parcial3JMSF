@@ -11,6 +11,8 @@ const RouterSetup = () => {
         <Route exact path="/">
           <Home />
         </Route>
+        <Route exact path="/tables"></Route>
+        <Route exact path="/form"></Route>
       </Switch>
     </Router>
   );

@@ -5,11 +5,21 @@ import "./navbar.css";
 
 const NavBarMain = () => {
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
       <Navbar.Brand as={Link} to="/">
-        Graffiti-App
+        Template App
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+
+      <Nav>
+        <Nav.Link as={Link} to="/tables">
+          Tables
+        </Nav.Link>
+        <Nav.Link as={Link} to="/form">
+          Form
+        </Nav.Link>
+      </Nav>
+
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
           <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
