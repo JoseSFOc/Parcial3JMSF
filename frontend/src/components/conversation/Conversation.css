@@ -1,0 +1,10 @@
+.conversations{
+    display: grid;
+    place-items: center;
+    background-color: white;
+}
+
+.conversations_body{
+    display: flex;
+    background-color: white;
+}
