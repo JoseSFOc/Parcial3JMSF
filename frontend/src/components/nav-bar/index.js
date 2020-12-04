@@ -20,6 +20,9 @@ const NavBarMain = () => {
             <Nav.Link as={Link} to="/form">
               Form
             </Nav.Link>
+            <Nav.Link as={Link} to="/map">
+              Map
+            </Nav.Link>
           </Nav>
 
           <Nav>

@@ -5,6 +5,7 @@ import Home from "../home";
 import Table from "../template/Table";
 import Form from "../template/Form";
 import Template from "../template/Template";
+import Map from "../map";
 
 const RouterSetup = () => {
   return (
@@ -14,13 +15,14 @@ const RouterSetup = () => {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route exact path="/tables">
+        <Route path="/tables">
           <Table />
         </Route>
-        <Route exact path="/form">
+        <Route path="/form">
           <Form />
         </Route>
         <Route path="/templates/:_id" children={<Template />}></Route>
+        <Route path="/map" children={<Map />} />
       </Switch>
     </Router>
   );

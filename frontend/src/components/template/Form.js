@@ -1,5 +1,7 @@
 import React, { useState, useReducer } from "react";
 import { Container, Form, Col, Button } from "react-bootstrap";
+import { reducer } from "../modal/reducer";
+import Modal from "../modal/Modal";
 
 const url = "http://localhost:3030/templates/";
 
@@ -22,7 +24,13 @@ const updateTemplate = async (template, updateComponent) => {
   updateComponent();
 };
 
+const initialState = {
+  isModalOpen: false,
+  modalContent: "",
+};
+
 const TemplateForm = (props) => {
+  const [state, dispatch] = useReducer(reducer, initialState);
   const [validated, setValidated] = useState(false);
   const [template, setTemplate] = useState(
     props.editTemplate || {
@@ -49,9 +57,11 @@ const TemplateForm = (props) => {
     if (template.title) {
       if (template._id) {
         updateTemplate(template, props.updateComponent);
+        dispatch({ type: "UPDATE_ITEM" });
         setValidated(true);
       } else {
         createTemplate(template);
+        dispatch({ type: "ADD_ITEM" });
         setTemplate({
           title: "",
           author: { author_id: "5fc239bd81249d00176aa6d0", name: "ElPepe" },
@@ -59,12 +69,22 @@ const TemplateForm = (props) => {
         });
         setValidated(false);
       }
+    } else {
+      dispatch({ type: "NO_VALUE" });
+      setValidated(true);
     }
+  };
+
+  const closeModal = () => {
+    dispatch({ type: "CLOSE_MODAL" });
   };
 
   return (
     <Container>
       <h1>Template Form</h1>
+      {!state.isModalOpen || (
+        <Modal closeModal={closeModal} modalContent={state.modalContent} />
+      )}
       <Form
         style={{ marginTop: "2rem", marginBottom: "2rem" }}
         noValidate
