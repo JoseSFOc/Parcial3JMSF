@@ -1,47 +1,139 @@
+const mongoose = require("mongoose");
 const Graffiti = require("../models/graffiti");
 const AllFacade = require("../dao/allFacade");
 const GraffitiFacade = require("../dao/graffitiFacade");
 
-exports.findAll = async () => {
-  return await AllFacade.find(Graffiti);
+exports.findAll = async (req, res, next) => {
+  try {
+    const sortBy = req.query.sortBy;
+    const orderBy = req.query.orderBy;
+    const query = new mongoose.Query();
+    let conditions = {};
+
+    for (let key in req.query) {
+      req.query[key] !== orderBy &&
+      req.query[key] !== sortBy &&
+      req.query[key] !== ""
+        ? (conditions[key] = req.query[key])
+        : null;
+    }
+
+    query.setQuery(conditions);
+    if (sortBy) query.setOptions({ sort: { [sortBy]: orderBy } });
+
+    res.status(200).json(await AllFacade.findQuery(Graffiti, query));
+  } catch (err) {
+    next(err);
+  }
 };
 
-exports.findById = async (id) => {
-  return await AllFacade.findById(Graffiti, id);
+exports.findById = async (req, res, next) => {
+  try {
+    res.status(200).json(await AllFacade.findById(Graffiti, req.params.id));
+  } catch (err) {
+    next(err);
+  }
 };
 
-exports.findQuery = async (query) => {
-  return await AllFacade.findQuery(Graffiti, query);
+exports.create = async (req, res, next) => {
+  console.log(req.body);
+  try {
+    res.status(201).json(await AllFacade.create(Graffiti, req.body));
+  } catch (err) {
+    next(err);
+  }
 };
 
-exports.create = async (object) => {
-  return await AllFacade.create(Graffiti, object);
+exports.delete = async (req, res, next) => {
+  try {
+    res.status(200).json(await AllFacade.delete(Graffiti, req.params.id));
+  } catch (err) {
+    next(err);
+  }
 };
 
-exports.delete = async (id) => {
-  return await AllFacade.delete(Graffiti, id);
+exports.put = async (req, res, next) => {
+  try {
+    res
+      .status(200)
+      .json(await AllFacade.put(Graffiti, req.params.id, req.body));
+  } catch (err) {
+    next(err);
+  }
 };
 
-exports.put = async (id, object) => {
-  return await AllFacade.put(Graffiti, id, object);
+exports.addPositiveVote = async (req, res, next) => {
+  try {
+    res
+      .status(201)
+      .json(
+        await GraffitiFacade.addPositiveVote(
+          Graffiti,
+          req.params.id,
+          req.body._id
+        )
+      );
+  } catch (err) {
+    next(err);
+  }
 };
 
-exports.addPositiveVote = async (id, userId) => {
-  return await GraffitiFacade.addPositiveVote(Graffiti, id, userId);
+exports.addNegativeVote = async (req, res, next) => {
+  try {
+    res
+      .status(201)
+      .json(
+        await GraffitiFacade.addNegativeVote(
+          Graffiti,
+          req.params.id,
+          req.body._id
+        )
+      );
+  } catch (err) {
+    next(err);
+  }
 };
 
-exports.addNegativeVote = async (id, userId) => {
-  return await GraffitiFacade.addNegativeVote(Graffiti, id, userId);
+exports.removePositiveVote = async (req, res, next) => {
+  try {
+    res
+      .status(200)
+      .json(
+        await GraffitiFacade.removePositiveVote(
+          Graffiti,
+          req.params.id,
+          req.body._id
+        )
+      );
+  } catch (err) {
+    next(err);
+  }
 };
 
-exports.removePositiveVote = async (id, userId) => {
-  return await GraffitiFacade.removePositiveVote(Graffiti, id, userId);
+exports.removeNegativeVote = async (req, res, next) => {
+  try {
+    res
+      .status(200)
+      .json(
+        await GraffitiFacade.removeNegativeVote(
+          Graffiti,
+          req.params.id,
+          req.body._id
+        )
+      );
+  } catch (err) {
+    next(err);
+  }
 };
 
-exports.removeNegativeVote = async (id, userId) => {
-  return await GraffitiFacade.removeNegativeVote(Graffiti, id, userId);
-};
-
-exports.addComment = async (id, commentId) => {
-  return await GraffitiFacade.addComment(Graffiti, id, commentId);
+exports.addComment = async (req, res, next) => {
+  try {
+    res
+      .status(201)
+      .json(
+        await GraffitiFacade.addComment(Graffiti, req.params.id, req.body._id)
+      );
+  } catch (err) {
+    next(err);
+  }
 };

@@ -17,6 +17,7 @@ const Map = () => {
         loc.text !== removeLoc.text
     );
     setLocations(newLocations);
+    setCenter([36.721261, -4.4212655]);
   };
 
   const handleChange = (e) => {
@@ -33,6 +34,10 @@ const Map = () => {
       setLocations([...locations, location]);
       setLocation({ lat: "", lon: "", text: "" });
     }
+  };
+
+  const selectLocation = (loc) => {
+    setCenter([loc.lat, loc.lon]);
   };
 
   return (
@@ -53,7 +58,7 @@ const Map = () => {
             <tbody>
               {locations.map((loc) => {
                 return (
-                  <tr>
+                  <tr onClick={() => selectLocation(loc)}>
                     <td>{loc.lat}</td>
                     <td>{loc.lon}</td>
                     <td>{loc.text}</td>
@@ -117,7 +122,12 @@ const Map = () => {
         </Col>
         <Col>
           <h1>Map</h1>
-          <MapContainer center={center} zoom={13} scrollWheelZoom={true}>
+          <MapContainer
+            key={center}
+            center={center}
+            zoom={13}
+            scrollWheelZoom={true}
+          >
             <TileLayer
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

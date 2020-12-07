@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const templateController = require("../controllers/templateController");
+const templateService = require("../services/templateService");
 
-router.get("/", templateController.findAll);
-router.post("/", templateController.create);
-router.get("/:id", templateController.findById);
-router.delete("/:id", templateController.delete);
-router.put("/:id", templateController.put);
+router.get("/", templateService.findAll);
+router.post("/", templateService.create);
+router.get("/:id", templateService.findById);
+router.delete("/:id", templateService.delete);
+router.put("/:id", templateService.put);
 
 module.exports = router;

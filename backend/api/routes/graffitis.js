@@ -1,16 +1,16 @@
 const express = require("express");
 const router = express.Router();
-const graffitiController = require("../controllers/graffitiController");
+const graffitiService = require("../services/graffitiService");
 
-router.get("/", graffitiController.findAll);
-router.post("/", graffitiController.create);
-router.get("/:id", graffitiController.findById);
-router.delete("/:id", graffitiController.delete);
-router.put("/:id", graffitiController.put);
-router.post("/:id/votes/positives", graffitiController.addPositiveVote);
-router.delete("/:id/votes/positives", graffitiController.removePositiveVote);
-router.post("/:id/votes/negatives", graffitiController.addNegativeVote);
-router.delete("/:id/votes/negatives", graffitiController.removeNegativeVote);
-router.post("/:id/comment", graffitiController.addComment);
+router.get("/", graffitiService.findAll);
+router.post("/", graffitiService.create);
+router.get("/:id", graffitiService.findById);
+router.delete("/:id", graffitiService.delete);
+router.put("/:id", graffitiService.put);
+router.post("/:id/votes/positives", graffitiService.addPositiveVote);
+router.delete("/:id/votes/positives", graffitiService.removePositiveVote);
+router.post("/:id/votes/negatives", graffitiService.addNegativeVote);
+router.delete("/:id/votes/negatives", graffitiService.removeNegativeVote);
+router.post("/:id/comment", graffitiService.addComment);
 
 module.exports = router;

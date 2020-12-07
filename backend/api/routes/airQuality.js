@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const airQualityController = require("../controllers/airQualityController");
+const airQualityService = require("../services/airQualityService");
 
-router.get("/", airQualityController.findAll);
+router.get("/", airQualityService.findAll);
 
 module.exports = router;
