@@ -1,8 +1,9 @@
 const Template = require("../models/template");
 const allFacade = require("../dao/allFacade");
-const templateFacade = require("../dao/graffitiFacade");
+const mongoose = require("mongoose");
+//const templateFacade = require("../dao/templateFacade");
 
-/* Find with custom query
+/* Find with custom query */
 exports.findAll = async (req, res, next) => {
   try {
     const sortBy = req.query.sortBy;
@@ -26,8 +27,8 @@ exports.findAll = async (req, res, next) => {
     next(err);
   }
 };
-*/
 
+/*
 exports.findAll = async function (req, res, next) {
   try {
     res.status(200).json(await allFacade.find(Template));
@@ -35,6 +36,7 @@ exports.findAll = async function (req, res, next) {
     next(err);
   }
 };
+*/
 
 exports.findById = async (req, res, next) => {
   try {

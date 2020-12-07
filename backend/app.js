@@ -30,14 +30,8 @@ mongoose
 
 /* Routes */
 const root = "./api/routes";
-const graffitiRoutes = require(root + "/graffitis");
-const userRoutes = require(root + "/users");
-const airQualityRoutes = require(root + "/airQuality");
 const templateRoutes = require(root + "/templates");
 
-app.use("/graffitis", graffitiRoutes);
-app.use("/users", userRoutes);
-app.use("/airQuality", airQualityRoutes);
 app.use("/templates", templateRoutes);
 
 /*Error Route*/
