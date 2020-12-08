@@ -4,8 +4,20 @@ const port = 3030;
 const mongodb = "mongodb://localhost:27017/examtemplate";
 const morgan = require("morgan");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+require("body-parser-xml")(bodyParser);
 
 /* Middleware */
+app.use(
+  bodyParser.xml({
+    xmlParseOptions: {
+      normalize: true,
+      normalizeTags: true,
+      explicitArray: false,
+      explicitRoot: false,
+    },
+  })
+);
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
