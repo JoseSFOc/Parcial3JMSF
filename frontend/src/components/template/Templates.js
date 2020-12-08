@@ -2,12 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Card } from "react-bootstrap";
 
-const Templates = ({ _id, title, author, date, number }) => {
-  //const imageUrl = defaultImage;
-  //<Card.Img variant="top" src={imageUrl} />
-
+const Templates = ({ _id, title, author, date, image, number }) => {
   return (
     <Card style={{ width: "18rem" }}>
+      {image ? <Card.Img variant="top" src={image} /> : <></>}
       <Card.Body>
         <Card.Title>{title}</Card.Title>
         <Card.Subtitle>By {author.name}</Card.Subtitle>

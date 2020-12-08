@@ -5,7 +5,13 @@ import "./navbar.css";
 
 const NavBarMain = () => {
   return (
-    <Navbar collapseOnSelect expand="lg" bg="primary" variant="dark">
+    <Navbar
+      sticky="top"
+      collapseOnSelect
+      expand="lg"
+      bg="primary"
+      variant="dark"
+    >
       <Navbar.Brand as={Link} to="/">
         Template App
       </Navbar.Brand>

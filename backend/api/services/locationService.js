@@ -1,7 +1,7 @@
-const Template = require("../models/template");
+const Location = require("../models/location");
 const allFacade = require("../dao/allFacade");
 const mongoose = require("mongoose");
-//const templateFacade = require("../dao/templateFacade");
+//const locationFacade = require("../dao/locationFacade");
 
 /* Find with custom query */
 exports.findAll = async (req, res, next) => {
@@ -22,7 +22,7 @@ exports.findAll = async (req, res, next) => {
     query.setQuery(conditions);
     if (sortBy) query.setOptions({ sort: { [sortBy]: orderBy } });
 
-    res.status(200).json(await allFacade.findQuery(Template, query));
+    res.status(200).json(await allFacade.findQuery(Location, query));
   } catch (err) {
     next(err);
   }
@@ -40,7 +40,7 @@ exports.findAll = async function (req, res, next) {
 
 exports.findById = async (req, res, next) => {
   try {
-    res.status(200).json(await allFacade.findById(Template, req.params.id));
+    res.status(200).json(await allFacade.findById(Location, req.params.id));
   } catch (err) {
     next(err);
   }
@@ -48,7 +48,7 @@ exports.findById = async (req, res, next) => {
 
 exports.create = async (req, res, next) => {
   try {
-    res.status(201).json(await allFacade.create(Template, req.body));
+    res.status(201).json(await allFacade.create(Location, req.body));
   } catch (err) {
     next(err);
   }
@@ -56,7 +56,7 @@ exports.create = async (req, res, next) => {
 
 exports.delete = async (req, res, next) => {
   try {
-    res.status(200).json(await allFacade.delete(Template, req.params.id));
+    res.status(200).json(await allFacade.delete(Location, req.params.id));
   } catch (err) {
     next(err);
   }
@@ -66,7 +66,7 @@ exports.put = async (req, res, next) => {
   try {
     res
       .status(200)
-      .json(await allFacade.put(Template, req.params.id, req.body));
+      .json(await allFacade.put(Location, req.params.id, req.body));
   } catch (err) {
     next(err);
   }

@@ -1,21 +1,54 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Table, Form, Button } from "react-bootstrap";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import { useFetch } from "../../custom-hooks/useFetch";
+
+const url = "http://localhost:3030/locations/";
+
+const createLocation = async (location) => {
+  await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(location),
+    redirect: "follow",
+  });
+};
+
+const updateLocation = async (location) => {
+  await fetch(url + location._id, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(location),
+    redirect: "follow",
+  });
+};
+
+const deleteLocation = (id) => {
+  fetch(url + id, {
+    method: "DELETE",
+  });
+};
 
 const Map = () => {
   const [center, setCenter] = useState([36.721261, -4.4212655]);
-  const [location, setLocation] = useState({ lat: "", lon: "", text: "" });
+  const [location, setLocation] = useState({
+    title: "",
+    coordinates: { lat: "", lon: "" },
+  });
   const [locations, setLocations] = useState([]);
+  const { products } = useFetch(url);
 
-  useEffect(() => {}, [center]);
+  useEffect(() => {
+    setLocations(products);
+  }, [products]);
+
+  const editLocation = (editLoc) => {
+    setLocation(editLoc);
+  };
 
   const removeLocation = (removeLoc) => {
-    const newLocations = locations.filter(
-      (loc) =>
-        loc.lat !== removeLoc.lat &&
-        loc.lon !== removeLoc.lon &&
-        loc.text !== removeLoc.text
-    );
+    const newLocations = locations.filter((loc) => loc._id !== removeLoc._id);
+    deleteLocation(removeLoc._id);
     setLocations(newLocations);
     setCenter([36.721261, -4.4212655]);
   };
@@ -24,20 +57,44 @@ const Map = () => {
     const name = e.target.name;
     const value = e.target.value;
 
-    setLocation({ ...location, [name]: value });
+    if (name === "lat" || name === "lon") {
+      setLocation({
+        ...location,
+        coordinates: { ...location.coordinates, [name]: value },
+      });
+    } else {
+      setLocation({ ...location, [name]: value });
+    }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault(e);
 
-    if (location.lat && location.lon && location.text) {
-      setLocations([...locations, location]);
-      setLocation({ lat: "", lon: "", text: "" });
+    if (
+      location.title &&
+      location.coordinates.lat &&
+      location.coordinates.lon
+    ) {
+      if (location._id) {
+        const newLocations = [
+          ...locations.filter((loc) => loc._id !== location._id),
+          location,
+        ];
+        updateLocation(location);
+        setLocations(newLocations);
+        setLocation({ title: "", coordinates: { lat: "", lon: "" } });
+      } else {
+        createLocation(location);
+        const response = await fetch(url);
+        const newLocations = await response.json();
+        setLocations(newLocations);
+        setLocation({ title: "", coordinates: { lat: "", lon: "" } });
+      }
     }
   };
 
   const selectLocation = (loc) => {
-    setCenter([loc.lat, loc.lon]);
+    setCenter([loc.coordinates.lat, loc.coordinates.lon]);
   };
 
   return (
@@ -48,9 +105,9 @@ const Map = () => {
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>Lat</th>
-                <th>Lon</th>
-                <th>Text</th>
+                <th>Title</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
                 <th>Edit</th>
                 <th>Delete</th>
               </tr>
@@ -58,12 +115,21 @@ const Map = () => {
             <tbody>
               {locations.map((loc) => {
                 return (
-                  <tr onClick={() => selectLocation(loc)}>
-                    <td>{loc.lat}</td>
-                    <td>{loc.lon}</td>
-                    <td>{loc.text}</td>
+                  <tr>
+                    <td onClick={() => selectLocation(loc)}>{loc.title}</td>
+                    <td onClick={() => selectLocation(loc)}>
+                      {loc.coordinates.lat}
+                    </td>
+                    <td onClick={() => selectLocation(loc)}>
+                      {loc.coordinates.lon}
+                    </td>
                     <td>
-                      <Button variant="primary">Edit</Button>
+                      <Button
+                        variant="primary"
+                        onClick={() => editLocation(loc)}
+                      >
+                        Edit
+                      </Button>
                     </td>
                     <td>
                       <Button
@@ -79,13 +145,23 @@ const Map = () => {
             </tbody>
           </Table>
           <Form>
+            <Form.Group controlId="title">
+              <Form.Label>Title</Form.Label>
+              <Form.Control
+                type="text"
+                name="title"
+                value={location.title}
+                onChange={handleChange}
+              />
+            </Form.Group>
+
             <Form.Row>
               <Form.Group as={Col} controlId="lat">
                 <Form.Label>Latitude</Form.Label>
                 <Form.Control
                   type="number"
                   name="lat"
-                  value={location.lat}
+                  value={location.coordinates.lat}
                   onChange={handleChange}
                 />
               </Form.Group>
@@ -95,21 +171,11 @@ const Map = () => {
                 <Form.Control
                   type="number"
                   name="lon"
-                  value={location.lon}
+                  value={location.coordinates.lon}
                   onChange={handleChange}
                 />
               </Form.Group>
             </Form.Row>
-
-            <Form.Group controlId="text">
-              <Form.Label>Text</Form.Label>
-              <Form.Control
-                type="text"
-                name="text"
-                value={location.text}
-                onChange={handleChange}
-              />
-            </Form.Group>
 
             <Button
               style={{ marginBottom: "2rem" }}
@@ -134,8 +200,11 @@ const Map = () => {
             />
             {locations.map((loc) => {
               return (
-                <Marker position={[loc.lat, loc.lon]}>
-                  <Popup>{loc.text}</Popup>
+                <Marker
+                  key={loc._id}
+                  position={[loc.coordinates.lat, loc.coordinates.lon]}
+                >
+                  <Popup>{loc.title}</Popup>
                 </Marker>
               );
             })}

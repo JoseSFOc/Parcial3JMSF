@@ -1,7 +1,8 @@
 import React, { useState, useReducer } from "react";
-import { Container, Form, Col, Button } from "react-bootstrap";
+import { Container, Form, Col, Button, Image } from "react-bootstrap";
 import { reducer } from "../modal/reducer";
 import Modal from "../modal/Modal";
+import uploadImage from "../commons/uploadImage";
 
 const url = "http://localhost:3030/templates/";
 
@@ -122,7 +123,38 @@ const TemplateForm = (props) => {
             />
           </Form.Group>
         </Form.Row>
+        <Form.Row>
+          <Form.Group as={Col} controlId="image">
+            <Form.Label>Image</Form.Label>
+            <br />
+            {template.image ? (
+              <Form.Label>
+                <Image
+                  style={{ maxHeight: "171px", maxWidth: "180px" }}
+                  rounded
+                  id="imagen-imgur"
+                  src={template.image}
+                  alt="preview"
+                  name="imagen-imgur"
+                />
+              </Form.Label>
+            ) : (
+              <div></div>
+            )}
 
+            <Form.Control
+              type="file"
+              name="image"
+              className="input-image"
+              onChange={() =>
+                uploadImage({ template, setTemplate: setTemplate })
+              }
+            />
+            <Form.Control.Feedback type="invalid">
+              Please insert a image.
+            </Form.Control.Feedback>
+          </Form.Group>
+        </Form.Row>
         <Form.Row>
           <Form.Group as={Col} controlId="formGridEmail">
             <Form.Label>Email</Form.Label>

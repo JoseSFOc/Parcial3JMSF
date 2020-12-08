@@ -31,8 +31,10 @@ mongoose
 /* Routes */
 const root = "./api/routes";
 const templateRoutes = require(root + "/templates");
+const locationsTemplateRoutes = require(root + "/locations");
 
 app.use("/templates", templateRoutes);
+app.use("/locations", locationsTemplateRoutes);
 
 /*Error Route*/
 app.use((req, res, next) => {
