@@ -22,4 +22,4 @@ npm install
 npm start
 ```
 
-Esto arrancará el servidor en local en el puerto 3000.
+Esto arrancará el cliente en local en el puerto 3000.
