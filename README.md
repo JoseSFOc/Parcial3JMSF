@@ -3,7 +3,8 @@
 ## Prerequisitos
 Es necesario tener instalado node.js, npm y MongoDB.
 
-## Backend
+## Instalación
+### Backend
 Desde la carpeta de backend, ejecutar los siguientes comandos:
 
 ```bash
@@ -13,7 +14,7 @@ npm start
 
 Esto arrancará el servidor en local en el puerto 3030.
 
-## Frontend
+### Frontend
 Desde la carpeta de frontend, ejecutar los siguientes comandos:
 
 ```bash
