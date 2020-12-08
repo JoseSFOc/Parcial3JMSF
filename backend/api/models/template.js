@@ -1,7 +1,5 @@
 const mongoose = require("mongoose");
 
-// TODO change model values
-
 const templateSchema = mongoose.Schema({
   _id: { type: mongoose.Schema.ObjectId, auto: true },
   title: {
