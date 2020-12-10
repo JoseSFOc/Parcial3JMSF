@@ -9,7 +9,7 @@ const NavBarMain = () => {
       sticky="top"
       collapseOnSelect
       expand="lg"
-      bg="primary"
+      style={{ backgroundColor: "green" }}
       variant="dark"
     >
       <Navbar.Brand as={Link} to="/">

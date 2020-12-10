@@ -77,14 +77,43 @@ exports.put = async (model, id, object) => {
 function errorHandler(err) {
   let error = new Error(err);
   switch (err.name) {
+    case "ParallelSaveError":
+      error.status = 400;
+      error.message = "The document is already been saved.";
+      break;
+    case "OverwriteModelError":
+      error.status = 403;
+      error.message = "You can't redifine the models.";
+      break;
+    case "MissingSchemaError":
+      error.status = 404;
+      error.message = "Model not found.";
+      break;
+    case "DocumentNotFoundError":
+      error.status = 404;
+      error.message = "The document you tried to save was not found.";
+      break;
+    case "ObjectParameterError" || "ObjectExpectedError":
+      error.status = 406;
+      error.message = "Resquest format not available.";
+      break;
+    case "DisconnectedError":
+      error.status = 500;
+      error.message = "The server was disconnected.";
+      break;
     case "ValidationError":
       error.status = 422;
       break;
     case "CastError":
       error.status = 400;
       break;
+    case "MongooseError":
+      error.status = 400;
+      error.message = "Error with the database.";
+      break;
     default:
       error.status = 500;
+      error.message = "Something went wrong in the server, sorry.";
   }
   throw error;
 }
