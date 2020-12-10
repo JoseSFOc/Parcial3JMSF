@@ -13,14 +13,24 @@ exports.findAll = async (req, res, next) => {
     let conditions = {};
 
     for (let key in req.query) {
-      req.query[key] !== orderBy &&
-      req.query[key] !== sortBy &&
-      req.query[key] !== partial &&
-      req.query[key] !== ""
-        ? partial && partial == 1
-          ? (conditions[key] = { $regex: req.query[key], $options: "i" })
-          : (conditions[key] = req.query[key])
-        : null;
+      /*
+      if (req.query[key] === email) {
+        conditions["user.email"] = { $in: req.query[key] };
+        console.log(conditions["user"] + " y " + req.query[key]);
+      }  
+      */
+      if (
+        req.query[key] !== orderBy &&
+        req.query[key] !== sortBy &&
+        req.query[key] !== partial &&
+        req.query[key] !== ""
+      ) {
+        if (partial && partial == 1) {
+          conditions[key] = { $regex: req.query[key], $options: "i" };
+        } else {
+          conditions[key] = req.query[key];
+        }
+      }
     }
 
     console.log(conditions);

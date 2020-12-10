@@ -8,16 +8,26 @@ exports.findAll = async (req, res, next) => {
   try {
     const sortBy = req.query.sortBy;
     const orderBy = req.query.orderBy;
+    const partial = req.query.partial;
     const query = new mongoose.Query();
     let conditions = {};
 
     for (let key in req.query) {
-      req.query[key] !== orderBy &&
-      req.query[key] !== sortBy &&
-      req.query[key] !== ""
-        ? (conditions[key] = req.query[key])
-        : null;
+      if (
+        req.query[key] !== orderBy &&
+        req.query[key] !== sortBy &&
+        req.query[key] !== partial &&
+        req.query[key] !== ""
+      ) {
+        if (partial && partial == 1) {
+          conditions[key] = { $regex: req.query[key], $options: "i" };
+        } else {
+          conditions[key] = req.query[key];
+        }
+      }
     }
+
+    console.log(conditions);
 
     query.setQuery(conditions);
     if (sortBy) query.setOptions({ sort: { [sortBy]: orderBy } });
