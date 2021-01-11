@@ -39,6 +39,7 @@ exports.login = (req, res) => {
                 if (err) {
                   return res
                     .status(500)
+                    .set("Access-Control-Allow-Origin", "*")
                     .json({ error: "Something went wrong" });
                 } else {
                   const token = jwt.sign(
