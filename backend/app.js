@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = 3030;
+const port = process.env.PORT || 3030;
 const mongodb = "mongodb://localhost:27017/examtemplate";
 const morgan = require("morgan");
 const mongoose = require("mongoose");
