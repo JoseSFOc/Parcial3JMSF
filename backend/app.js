@@ -5,10 +5,12 @@ const mongodb =
   process.env.MONGO_ATLAS_URI || "mongodb://localhost:27017/examtemplate";
 const morgan = require("morgan");
 const mongoose = require("mongoose");
+const cors = require("cors");
 const bodyParser = require("body-parser");
 require("body-parser-xml")(bodyParser);
 
 /* Middleware  */
+app.use(cors());
 app.use(
   bodyParser.xml({
     xmlParseOptions: {
