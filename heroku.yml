@@ -9,7 +9,6 @@ Backend:
     - main
   stage: production
   script:
-    - cd backend
     - apt-get update -qy
     - apt-get install -y ruby-dev
     - gem install dpl
