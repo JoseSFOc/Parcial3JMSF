@@ -5,12 +5,10 @@ const mongodb =
   process.env.MONGO_ATLAS_URI || "mongodb://localhost:27017/examtemplate";
 const morgan = require("morgan");
 const mongoose = require("mongoose");
-const cors = require("cors");
 const bodyParser = require("body-parser");
 require("body-parser-xml")(bodyParser);
 
 /* Middleware  */
-app.use(cors());
 app.use(
   bodyParser.xml({
     xmlParseOptions: {
@@ -25,6 +23,13 @@ app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use((req, res, next) => {
+  res.append("Access-Control-Allow-Origin", ["*"]);
+  res.append("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+  res.append("Access-Control-Allow-Headers", "Content-Type");
+  next();
+});
+/*
+app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
@@ -35,7 +40,7 @@ app.use((req, res, next) => {
     return res.status(200).json({});
   }
   next();
-});
+});*/
 
 /* Database */
 mongoose
