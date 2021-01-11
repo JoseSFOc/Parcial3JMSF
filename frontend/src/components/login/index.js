@@ -8,7 +8,10 @@ const Login = () => {
   const responseSuccess = (response) => {
     fetch(url, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
       body: JSON.stringify({ tokenId: response.tokenId }),
     })
       .then((res) => res.json())
