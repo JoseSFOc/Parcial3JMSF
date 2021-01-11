@@ -13,6 +13,7 @@ const Login = () => {
         "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify({ tokenId: response.tokenId }),
+      mode: "no-cors",
       redirect: "follow",
     })
       .then((res) => res.json())
