@@ -4,15 +4,11 @@ const port = process.env.PORT || 3030;
 const mongodb =
   process.env.MONGO_ATLAS_URI || "mongodb://localhost:27017/examtemplate";
 const morgan = require("morgan");
-const cors = require("cors");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 require("body-parser-xml")(bodyParser);
 
 /* Middleware  */
-
-app.options("*", cors());
-
 app.use(
   bodyParser.xml({
     xmlParseOptions: {
@@ -26,29 +22,11 @@ app.use(
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-/*app.use(
-  cors({
-    origin: "*",
-    methods: "PUT, POST, PATCH, DELETE, GET",
-    allowedHeaders:
-      "Origin, X-Requested-With, content-type, accept, Authorization",
-    preflightContinue: true,
-  })
-);*/
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, content-type, accept, Authorization"
-  );
-  res.header(
-    "Access-Control-Request-Headers",
-    "X-Requested-With, accept, content-type"
-  );
-  res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
-  res.header(
-    "Access-Control-Expose-Headers",
-    "Origin, X-Requested-With, content-type, accept, Authorization"
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
   );
   if (req.method === "OPTIONS") {
     res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
