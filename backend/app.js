@@ -26,7 +26,7 @@ app.use(
 app.use(morgan("dev"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(
+/*app.use(
   cors({
     origin: "*",
     methods: "PUT, POST, PATCH, DELETE, GET",
@@ -34,8 +34,8 @@ app.use(
       "Origin, X-Requested-With, content-type, accept, Authorization",
     preflightContinue: true,
   })
-);
-/*app.use((req, res, next) => {
+);*/
+app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
@@ -45,12 +45,17 @@ app.use(
     "Access-Control-Request-Headers",
     "X-Requested-With, accept, content-type"
   );
+  res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
+  res.header(
+    "Access-Control-Expose-Headers",
+    "Origin, X-Requested-With, content-type, accept, Authorization"
+  );
   if (req.method === "OPTIONS") {
     res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
     return res.status(200).json({});
   }
   next();
-});*/
+});
 
 /* Database */
 mongoose
