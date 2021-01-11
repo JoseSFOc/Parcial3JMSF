@@ -32,6 +32,7 @@ app.use(
     methods: "PUT, POST, PATCH, DELETE, GET",
     allowedHeaders:
       "Origin, X-Requested-With, content-type, accept, Authorization",
+    preflightContinue: true,
   })
 );
 /*app.use((req, res, next) => {
