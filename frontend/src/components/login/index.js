@@ -2,7 +2,7 @@ import React from "react";
 import { GoogleLogin } from "react-google-login";
 
 //const url = "http://localhost:3030/login";
-const url = "https://mern-template-web2020.herokuapp.com/login";
+const url = "https://mern-template-web2020.herokuapp.com/login/";
 
 const Login = () => {
   const responseSuccess = (response) => {
@@ -13,6 +13,7 @@ const Login = () => {
         "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify({ tokenId: response.tokenId }),
+      redirect: "follow",
     })
       .then((res) => res.json())
       .then((token) => console.log(token));
