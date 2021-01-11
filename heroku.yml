@@ -6,7 +6,7 @@ stages:
 Backend:
   image: ruby:latest
   only:
-    - master
+    - main
   stage: production
   script:
     - cd backend
