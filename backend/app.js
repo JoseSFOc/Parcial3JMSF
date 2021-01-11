@@ -1,7 +1,8 @@
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 3030;
-const mongodb = "mongodb://localhost:27017/examtemplate";
+const mongodb =
+  process.env.MONGO_ATLAS_URI || "mongodb://localhost:27017/examtemplate";
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
