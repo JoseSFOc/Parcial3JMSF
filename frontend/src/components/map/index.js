@@ -3,7 +3,7 @@ import { Container, Row, Col, Table, Form, Button } from "react-bootstrap";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { useFetch } from "../../custom-hooks/useFetch";
 
-const url = "http://localhost:3030/locations/";
+const url = "https://mern-template-web2020.herokuapp.com/locations/";
 
 const createLocation = async (location) => {
   await fetch(url, {

@@ -45,9 +45,13 @@ mongoose
 const root = "./api/routes";
 const templateRoutes = require(root + "/templates");
 const locationsTemplateRoutes = require(root + "/locations");
+const userRoutes = require(root + "/users");
+const loginRoutes = require(root + "/logins");
 
 app.use("/templates", templateRoutes);
 app.use("/locations", locationsTemplateRoutes);
+app.use("/users", userRoutes);
+app.use("/login", loginRoutes);
 
 /*Error Route*/
 app.use((req, res, next) => {

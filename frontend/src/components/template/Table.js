@@ -3,7 +3,7 @@ import { Container, Table, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useFetch } from "../../custom-hooks/useFetch";
 
-const url = "http://localhost:3030/templates/";
+const url = "https://mern-template-web2020.herokuapp.com/templates/";
 
 const TemplateTable = () => {
   const { products } = useFetch(url);
