@@ -5,6 +5,8 @@ const mongodb =
   process.env.MONGO_ATLAS_URI || "mongodb://localhost:27017/examtemplate";
 const morgan = require("morgan");
 const mongoose = require("mongoose");
+const formData = require("express-form-data");
+const os = require("os");
 const bodyParser = require("body-parser");
 require("body-parser-xml")(bodyParser);
 
@@ -20,10 +22,30 @@ app.use(
   })
 );
 app.use(morgan("dev"));
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
+
+// for parsing application/json
+app.use(bodyParser.json());
+
+// for parsing application/xwww-
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// for parsing multipart/form-data
+// parse data with connect-multiparty.
+app.use(
+  formData.parse({
+    uploadDir: os.tmpdir(),
+    autoClean: true,
+  })
+);
+// delete from the request all empty files (size == 0)
+app.use(formData.format());
+// change the file objects to fs.ReadStream
+app.use(formData.stream());
+// union the body and the files
+app.use(formData.union());
+
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Origin", "http://localhost:3000");
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept, Authorization"
