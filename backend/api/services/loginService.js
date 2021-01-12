@@ -29,6 +29,7 @@ exports.login = (req, res) => {
                 process.env.JWT_SIGNING_KEY,
                 { expiresIn: "7d" }
               );
+              res.header("Access-Control-Allow-Origin", "*");
               res.status(200).json({
                 token,
                 user,
@@ -46,6 +47,7 @@ exports.login = (req, res) => {
                     process.env.JWT_SIGNING_KEY,
                     { expiresIn: "7d" }
                   );
+                  res.header("Access-Control-Allow-Origin", "*");
                   res.status(200).json({
                     token,
                     newUser,
@@ -55,6 +57,9 @@ exports.login = (req, res) => {
             }
           }
         });
+      } else {
+        res.header("Access-Control-Allow-Origin", "*");
+        return res.status(403).json({ error: "Forbidden" });
       }
     });
 };
