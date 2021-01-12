@@ -10,9 +10,6 @@ const os = require("os");
 const bodyParser = require("body-parser");
 require("body-parser-xml")(bodyParser);
 
-const cors = require("cors");
-app.use(cors());
-
 /* Middleware  */
 app.use(
   bodyParser.xml({
@@ -47,18 +44,16 @@ app.use(formData.stream());
 // union the body and the files
 app.use(formData.union());
 
-/*app.use((req, res, next) => {
+app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header(
-    "Access-Control-Allow-Headers",
-    "Access-Control-Allow-Origin, Origin, X-Requested-With, Content-Type, Accept, Authorization"
-  );
+  res.header("Access-Control-Allow-Headers", "*");
+  res.header("Access-Control-Expose-Headers", "*");
   if (req.method === "OPTIONS") {
     res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
     return res.status(200).json({});
   }
   next();
-});*/
+});
 
 /* Database */
 mongoose
@@ -79,7 +74,7 @@ app.use("/users", userRoutes);
 app.use("/login", loginRoutes);
 
 /*Error Route*/
-/*
+
 app.use((req, res, next) => {
   const error = new Error(
     "Method " + req.method + " for " + req.originalUrl + " not found"
@@ -93,7 +88,7 @@ app.use((error, req, res, next) => {
       message: error.message,
     },
   });
-});*/
+});
 
 /* Listen */
 app.listen(port, () => {
