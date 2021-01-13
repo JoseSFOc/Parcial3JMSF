@@ -1,6 +1,6 @@
 const uploadImage = (props) => {
   const image = document.getElementsByClassName("input-image")[0].files[0];
-  const url = `http://localhost:3030/uploadImage`;
+  const url = `https://mern-template-web2020.herokuapp.com/uploadImage`;
   const formData = new FormData();
   formData.append("image", image);
 

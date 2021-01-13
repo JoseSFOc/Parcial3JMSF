@@ -1,9 +1,16 @@
 import "./App.css";
-import React from "react";
+import React, { useState } from "react";
 import RouterSetup from "./components/nav-bar/RouterSetup";
+import Login from "./components/login";
 
 function App() {
-  return <RouterSetup />;
+  const [token, setToken] = useState();
+
+  if (token) {
+    return <RouterSetup />;
+  } else {
+    return <Login setToken={setToken} />;
+  }
 }
 
 export default App;

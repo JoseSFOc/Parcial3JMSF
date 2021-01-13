@@ -9,10 +9,12 @@ const NavBarMain = () => {
       sticky="top"
       collapseOnSelect
       expand="lg"
-      style={{ backgroundColor: "green" }}
+      style={{
+        backgroundImage: "linear-gradient(120deg, #6CE67D 0%, #C5F951 100%)",
+      }}
       variant="dark"
     >
-      <Navbar.Brand as={Link} to="/home">
+      <Navbar.Brand as={Link} to="/">
         Template App
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />

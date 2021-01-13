@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import NavBarMain from "./index";
-import Login from "../login";
 import Home from "../template";
 import Table from "../template/Table";
 import Form from "../template/Form";
@@ -14,9 +13,6 @@ const RouterSetup = () => {
       <NavBarMain />
       <Switch>
         <Route exact path="/">
-          <Login />
-        </Route>
-        <Route path="/home">
           <Home />
         </Route>
         <Route path="/tables">
