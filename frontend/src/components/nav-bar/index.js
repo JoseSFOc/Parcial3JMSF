@@ -12,7 +12,7 @@ const NavBarMain = () => {
       style={{ backgroundColor: "green" }}
       variant="dark"
     >
-      <Navbar.Brand as={Link} to="/">
+      <Navbar.Brand as={Link} to="/home">
         Template App
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />

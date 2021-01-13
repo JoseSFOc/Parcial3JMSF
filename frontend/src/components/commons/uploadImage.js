@@ -1,20 +1,25 @@
 const uploadImage = (props) => {
-  const req = new XMLHttpRequest();
-  const data = new FormData();
-  const elem = document.getElementsByClassName("input-image")[0].files[0];
-  let url;
+  const image = document.getElementsByClassName("input-image")[0].files[0];
+  const url = `http://localhost:3030/uploadImage`;
+  const formData = new FormData();
+  formData.append("image", image);
 
-  data.append("image", elem);
-  req.open("POST", "https://api.imgur.com/3/image/");
-  req.setRequestHeader("Authorization", "Client-ID f50577586266e01");
-  req.onreadystatechange = function () {
-    if (req.status === 200 && req.readyState === 4) {
-      let res = JSON.parse(req.responseText);
-      url = `https://i.imgur.com/${res.data.id}.png`;
-      props.setTemplate({ ...props.template, image: url });
+  const doFetch = async () => {
+    const response = await fetch(url, {
+      method: "POST",
+      body: formData,
+      redirect: "follow",
+    });
+    const imageUrl = await response.json();
+
+    try {
+      props.setTemplate({ ...props.template, image: imageUrl });
+    } catch (e) {
+      console.log(e);
     }
   };
-  req.send(data);
+
+  doFetch();
 };
 
 export default uploadImage;

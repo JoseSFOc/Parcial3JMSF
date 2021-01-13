@@ -8,19 +8,8 @@ const mongoose = require("mongoose");
 const formData = require("express-form-data");
 const os = require("os");
 const bodyParser = require("body-parser");
-require("body-parser-xml")(bodyParser);
 
-/* Middleware  */
-app.use(
-  bodyParser.xml({
-    xmlParseOptions: {
-      normalize: true,
-      normalizeTags: true,
-      explicitArray: false,
-      explicitRoot: false,
-    },
-  })
-);
+/* Middleware */
 app.use(morgan("dev"));
 
 // for parsing application/json
@@ -48,7 +37,7 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
-    "Access-Control-Allow-Origin, Origin, X-Requested-With, Content-Type, Accept, Authorization"
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
   );
   if (req.method === "OPTIONS") {
     res.header("Access-Control-Allow-Methods", "PUT, POST, PATCH, DELETE, GET");
@@ -69,11 +58,13 @@ const templateRoutes = require(root + "/templates");
 const locationsTemplateRoutes = require(root + "/locations");
 const userRoutes = require(root + "/users");
 const loginRoutes = require(root + "/logins");
+const imgurRoutes = require(root + "/imgur");
 
 app.use("/templates", templateRoutes);
 app.use("/locations", locationsTemplateRoutes);
 app.use("/users", userRoutes);
 app.use("/login", loginRoutes);
+app.use("/uploadImage", imgurRoutes);
 
 /*Error Route*/
 
