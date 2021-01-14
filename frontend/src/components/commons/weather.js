@@ -8,22 +8,16 @@ const Weather = ({ lat, lon }) => {
 
   if (products.main) {
     return (
-      <Container
-        className="rounded mb-0"
-        style={{
-          backgroundColor: "#FCFCFC",
-          maxWidth: "15rem",
-        }}
-      >
-        <p>
+      <div>
+        <p style={{ color: "white" }}>
           {products.name} | {products.main.temp}°C{" "}
+          <img
+            style={{ maxWidth: "5rem", maxHeight: "5rem" }}
+            src={products.icon}
+            alt="weather-icon"
+          />
         </p>
-        <img
-          style={{ maxWidth: "5rem", maxHeight: "5rem" }}
-          src={products.icon}
-          alt="weather-icon"
-        />
-      </Container>
+      </div>
     );
   } else {
     return <></>;
