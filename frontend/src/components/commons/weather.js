@@ -1,5 +1,4 @@
 import React from "react";
-import { Container } from "react-bootstrap";
 import { useFetch } from "../../custom-hooks/useFetch";
 
 const Weather = ({ lat, lon }) => {
