@@ -6,7 +6,7 @@
 (A) Services (services/templateService.js) #services @backend
 (B) Facade (dao/templateFacade.js) #dao @backend
 (B) OpenAPI / Postman #test @backend
-(C) Change bd name in (app.js - l:4) @backend
+(C) Change bd name in (app.js - l:4) and Heroku @backend
 
 (A) Templates (template/Templates.js) @frontend
 (A) Index (template/index.js) @frontend
@@ -16,3 +16,5 @@
 (B) Map (map/index.js) @frontend
 (A) Insert routes in nav-bar/index.js @frontend
 (A) Insert routes in nav-bar/RouterSetup.js @frontend
+
+(A) Change URL in frontend for Heroku @cloud

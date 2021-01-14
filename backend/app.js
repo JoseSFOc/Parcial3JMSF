@@ -59,12 +59,14 @@ const locationsTemplateRoutes = require(root + "/locations");
 const userRoutes = require(root + "/users");
 const loginRoutes = require(root + "/logins");
 const imgurRoutes = require(root + "/imgur");
+const weahterRoutes = require(root + "/weather");
 
 app.use("/templates", templateRoutes);
 app.use("/locations", locationsTemplateRoutes);
 app.use("/users", userRoutes);
 app.use("/login", loginRoutes);
 app.use("/uploadImage", imgurRoutes);
+app.use("/weather", weahterRoutes);
 
 /*Error Route*/
 
