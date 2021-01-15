@@ -37,7 +37,7 @@ const NavBarMain = ({ token }) => {
         <Nav className="m-auto">
           <Nav>
             <Nav.Item style={{ color: "white" }}>
-              Bienvenido {token.user.name}
+              Bienvenido {token.user.name || ""}
             </Nav.Item>
           </Nav>
         </Nav>
