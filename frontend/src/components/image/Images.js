@@ -5,7 +5,7 @@ import { Card, Button } from "react-bootstrap";
 const url = "https://parcial3-jmsf.herokuapp.com/images/";
 
 const Images = (image) => {
-  const { _id, description, imageUrl, hashtags, author, likes } = image;
+  const { _id, description, imageUrl, author } = image;
   const [imageSet, setImageSet] = useState(image);
 
   const updateImage = async (image) => {
