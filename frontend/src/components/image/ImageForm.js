@@ -4,7 +4,7 @@ import { reducer } from "../modal/reducer";
 import Modal from "../modal/Modal";
 import uploadImage from "../commons/uploadImage";
 
-const url = "http://localhost:3030/images/";
+const url = "https://parcial3-jmsf.herokuapp.com/images/";
 
 const createImage = async (image) => {
   console.log(image);

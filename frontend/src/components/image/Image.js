@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { Container, Row, Col, Button, Form } from "react-bootstrap";
 import { useFetch } from "../../custom-hooks/useFetch";
 
-const url = "http://localhost:3030/images/";
+const url = "https://parcial3-jmsf.herokuapp.com/images/";
 
 const removeImage = (imageId) => {
   fetch(url + imageId, {

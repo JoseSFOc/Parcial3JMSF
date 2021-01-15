@@ -3,7 +3,7 @@ import Images from "./Images";
 import { useFetch } from "../../custom-hooks/useFetch";
 import { Container, Form, Button, Col } from "react-bootstrap";
 
-const url = "http://localhost:3030/images/";
+const url = "https://parcial3-jmsf.herokuapp.com/images/";
 
 const ImageList = () => {
   const [images, setImages] = useState();
