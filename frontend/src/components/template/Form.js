@@ -4,7 +4,7 @@ import { reducer } from "../modal/reducer";
 import Modal from "../modal/Modal";
 import uploadImage from "../commons/uploadImage";
 
-const url = "https://mern-template-web2020.herokuapp.com/templates/";
+const url = "https://parcial3-jmsf.herokuapp.com/templates/";
 
 const createTemplate = async (template) => {
   await fetch(url, {

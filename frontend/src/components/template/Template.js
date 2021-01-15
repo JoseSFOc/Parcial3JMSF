@@ -4,7 +4,7 @@ import { Container, Row, Col, Accordion, Button, Card } from "react-bootstrap";
 import { useFetch } from "../../custom-hooks/useFetch";
 import TemplateForm from "./Form";
 
-const url = "https://mern-template-web2020.herokuapp.com/templates/";
+const url = "https://parcial3-jmsf.herokuapp.com/templates/";
 
 const removeTemplate = (templateId) => {
   fetch(url + templateId, {

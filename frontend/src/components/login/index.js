@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { GoogleLogin } from "react-google-login";
 
 //const url = "http://localhost:3030/login";
-const url = "https://mern-template-web2020.herokuapp.com/login/";
+const url = "https://parcial3-jmsf.herokuapp.com/login/";
 
 const Login = (props) => {
   const [clientID, setClientID] = useState("");
