@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 3030;
 const mongodb =
-  process.env.MONGO_ATLAS_URI || "mongodb://localhost:27017/examtemplate";
+  process.env.MONGO_ATLAS_URI || "mongodb://localhost:27017/photonet";
 const morgan = require("morgan");
 const mongoose = require("mongoose");
 const formData = require("express-form-data");
@@ -54,19 +54,17 @@ mongoose
 
 /* Routes */
 const root = "./api/routes";
-const templateRoutes = require(root + "/templates");
-const locationsTemplateRoutes = require(root + "/locations");
+const imageRoutes = require(root + "/images");
 const userRoutes = require(root + "/users");
 const loginRoutes = require(root + "/logins");
 const imgurRoutes = require(root + "/imgur");
-const weahterRoutes = require(root + "/weather");
+const weatherRoutes = require(root + "/weather");
 
-app.use("/templates", templateRoutes);
-app.use("/locations", locationsTemplateRoutes);
+app.use("/images", imageRoutes);
 app.use("/users", userRoutes);
 app.use("/login", loginRoutes);
 app.use("/uploadImage", imgurRoutes);
-app.use("/weather", weahterRoutes);
+app.use("/weather", weatherRoutes);
 
 /*Error Route*/
 

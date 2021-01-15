@@ -1,7 +1,7 @@
-const Location = require("../models/location");
+const Image = require("../models/image");
 const allFacade = require("../dao/allFacade");
 const mongoose = require("mongoose");
-//const locationFacade = require("../dao/locationFacade");
+//const imageFacade = require("../dao/imageFacade");
 
 /* Find with custom query */
 exports.findAll = async (req, res, next) => {
@@ -13,6 +13,12 @@ exports.findAll = async (req, res, next) => {
     let conditions = {};
 
     for (let key in req.query) {
+      /*
+      if (req.query[key] === email) {
+        conditions["user.email"] = { $in: req.query[key] };
+        console.log(conditions["user"] + " y " + req.query[key]);
+      }  
+      */
       if (
         req.query[key] !== orderBy &&
         req.query[key] !== sortBy &&
@@ -32,7 +38,7 @@ exports.findAll = async (req, res, next) => {
     query.setQuery(conditions);
     if (sortBy) query.setOptions({ sort: { [sortBy]: orderBy } });
 
-    res.status(200).json(await allFacade.findQuery(Location, query));
+    res.status(200).json(await allFacade.findQuery(Image, query));
   } catch (err) {
     next(err);
   }
@@ -41,7 +47,7 @@ exports.findAll = async (req, res, next) => {
 /*
 exports.findAll = async function (req, res, next) {
   try {
-    res.status(200).json(await allFacade.find(Template));
+    res.status(200).json(await allFacade.find(Image));
   } catch (err) {
     next(err);
   }
@@ -50,7 +56,7 @@ exports.findAll = async function (req, res, next) {
 
 exports.findById = async (req, res, next) => {
   try {
-    res.status(200).json(await allFacade.findById(Location, req.params.id));
+    res.status(200).json(await allFacade.findById(Image, req.params.id));
   } catch (err) {
     next(err);
   }
@@ -58,7 +64,7 @@ exports.findById = async (req, res, next) => {
 
 exports.create = async (req, res, next) => {
   try {
-    res.status(201).json(await allFacade.create(Location, req.body));
+    res.status(201).json(await allFacade.create(Image, req.body));
   } catch (err) {
     next(err);
   }
@@ -66,7 +72,7 @@ exports.create = async (req, res, next) => {
 
 exports.delete = async (req, res, next) => {
   try {
-    res.status(200).json(await allFacade.delete(Location, req.params.id));
+    res.status(200).json(await allFacade.delete(Image, req.params.id));
   } catch (err) {
     next(err);
   }
@@ -74,9 +80,7 @@ exports.delete = async (req, res, next) => {
 
 exports.put = async (req, res, next) => {
   try {
-    res
-      .status(200)
-      .json(await allFacade.put(Location, req.params.id, req.body));
+    res.status(200).json(await allFacade.put(Image, req.params.id, req.body));
   } catch (err) {
     next(err);
   }

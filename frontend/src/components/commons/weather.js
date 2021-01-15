@@ -2,7 +2,7 @@ import React from "react";
 import { useFetch } from "../../custom-hooks/useFetch";
 
 const Weather = ({ lat, lon }) => {
-  const url = `https://parcial3-jmsf.herokuapp.com/weather?lat=${lat}&lon=${lon}`;
+  const url = `http://localhost:3030/weather?lat=${lat}&lon=${lon}`;
   const { products } = useFetch(url);
 
   if (products.main) {

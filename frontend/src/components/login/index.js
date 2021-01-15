@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { GoogleLogin } from "react-google-login";
 
-//const url = "http://localhost:3030/login";
-const url = "https://parcial3-jmsf.herokuapp.com/login/";
+const url = "http://localhost:3030/login";
+//const url = "http://localhost:3030/login/";
 
 const Login = (props) => {
   const [clientID, setClientID] = useState("");
@@ -60,7 +60,7 @@ const Login = (props) => {
               fontWeight: "bold",
             }}
           >
-            Template App
+            PhotoNet
           </h2>
         </div>
 

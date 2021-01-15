@@ -1,12 +1,12 @@
 import React from "react";
-import { Navbar, Nav, NavDropdown } from "react-bootstrap";
+import { Navbar, Nav, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import Weather from "../commons/weather";
-import { useLocation } from "../../custom-hooks/useLocation";
 import "./navbar.css";
 
-const NavBarMain = () => {
-  const location = useLocation();
+const NavBarMain = ({ token }) => {
+  const logout = () => {
+    window.location.reload();
+  };
 
   return (
     <Navbar
@@ -20,7 +20,7 @@ const NavBarMain = () => {
       variant="dark"
     >
       <Navbar.Brand as={Link} to="/">
-        Template App
+        PhotoNet
       </Navbar.Brand>
 
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -28,34 +28,28 @@ const NavBarMain = () => {
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
           <Nav>
-            <Nav.Link as={Link} to="/tables">
-              Tables
+            <Nav.Link as={Link} to="/upload">
+              Upload
             </Nav.Link>
-            <Nav.Link as={Link} to="/form">
-              Form
-            </Nav.Link>
-            <Nav.Link as={Link} to="/map">
-              Map
-            </Nav.Link>
-          </Nav>
-
-          <Nav>
-            <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item>
-            </NavDropdown>
           </Nav>
         </Nav>
 
-        <Nav className="ml-auto" style={{ paddingTop: "1rem" }}>
-          <Weather lat={location.lat} lon={location.lon} />
+        <Nav className="m-auto">
+          <Nav>
+            <Nav.Item style={{ color: "white" }}>
+              Bienvenido {token.user.name}
+            </Nav.Item>
+          </Nav>
+        </Nav>
+        <Nav className="ml-auto">
+          <Button variant="light" onClick={logout}>
+            <Link
+              to="/"
+              style={{ color: "inherit", textDecoration: "inherit" }}
+            >
+              Log Out
+            </Link>
+          </Button>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

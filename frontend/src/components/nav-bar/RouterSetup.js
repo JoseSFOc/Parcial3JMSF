@@ -1,28 +1,22 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import NavBarMain from "./index";
-import Home from "../template";
-import Table from "../template/Table";
-import Form from "../template/Form";
-import Template from "../template/Template";
-import Map from "../map";
+import Home from "../image";
+import ImageForm from "../image/ImageForm";
+import Image from "../image/Image";
 
-const RouterSetup = () => {
+const RouterSetup = ({ token }) => {
   return (
     <Router>
-      <NavBarMain />
+      <NavBarMain token={token} />
       <Switch>
         <Route exact path="/">
           <Home />
         </Route>
-        <Route path="/tables">
-          <Table />
+        <Route path="/upload">
+          <ImageForm token={token} />
         </Route>
-        <Route path="/form">
-          <Form />
-        </Route>
-        <Route path="/templates/:_id" children={<Template />}></Route>
-        <Route path="/map" children={<Map />} />
+        <Route path="/images/:_id" children={<Image token={token} />}></Route>
       </Switch>
     </Router>
   );

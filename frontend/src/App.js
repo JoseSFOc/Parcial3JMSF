@@ -7,7 +7,7 @@ function App() {
   const [token, setToken] = useState();
 
   if (token) {
-    return <RouterSetup />;
+    return <RouterSetup token={token} />;
   } else {
     return <Login setToken={setToken} />;
   }
